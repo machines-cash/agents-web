@@ -29,7 +29,13 @@ External pull requests must target `contrib`.
 cp .env.example .env.local
 ```
 
-2. Ensure an API server is reachable at `NEXT_PUBLIC_API_BASE_URL` (default `http://localhost:8080`).
+2. Pick API profile in `.env.local`:
+   - Dev API (recommended for contributors):
+     - `NEXT_PUBLIC_API_BASE_URL=https://dev-api.machines.cash`
+     - `NEXT_PUBLIC_APP_ORIGIN=https://sandbox.machines.cash`
+   - Prod API (maintainer/debug only):
+     - `NEXT_PUBLIC_API_BASE_URL=https://api.machines.cash`
+     - `NEXT_PUBLIC_APP_ORIGIN=https://app.machines.cash`
 3. Install and run:
 
 ```bash
@@ -47,12 +53,11 @@ npm run build
 ```
 
 ## Environment
-`.env.example` includes local defaults:
-- `NEXT_PUBLIC_API_BASE_URL=http://localhost:8080`
-- `NEXT_PUBLIC_APP_ORIGIN=http://localhost:3000`
-- `NEXT_PUBLIC_AGENT_ORIGIN=http://localhost:3002`
+Contributors run only the frontend locally and point it to hosted APIs:
+- local frontend: `http://localhost:3002`
+- hosted backend: `https://dev-api.machines.cash` (recommended) or `https://api.machines.cash`
 
-Sandbox KYC tip (backend behavior): in sandbox, setting KYC `lastName` to `approved` can auto-approve.
+Sandbox KYC tip (backend behavior): set KYC `lastName` to `approved` to force an approved state in sandbox/dev mode.
 
 ## Security and disclosure
 See `SECURITY.md`.
