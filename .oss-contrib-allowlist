@@ -1,5 +1,5 @@
 # Public contributor change policy (paths relative to public repo root).
-# Workflow files are intentionally excluded.
+# Only the CI workflow file is allowlisted for maintainer policy updates.
 
 README.md
 CONTRIBUTING.md
@@ -15,5 +15,7 @@ postcss.config.mjs
 tsconfig.json
 vercel.json
 UI_AGENT_CONTEXT.md
+.oss-contrib-allowlist
+.github/workflows/ci.yml
 public/
 src/
