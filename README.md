@@ -6,6 +6,7 @@ Public frontend for the Machines Cash agent experience.
 - Mobile-first Next.js app for `agent.machines.cash`.
 - Open-source contribution surface only.
 - Private backend/services remain in a separate private monorepo.
+- This repository does not include backend API code.
 
 ## API surface this app uses
 - `POST /auth/challenge`
@@ -36,6 +37,7 @@ cp .env.example .env.local
    - Prod API (maintainer/debug only):
      - `NEXT_PUBLIC_API_BASE_URL=https://api.machines.cash`
      - `NEXT_PUBLIC_APP_ORIGIN=https://app.machines.cash`
+   - Do not point `NEXT_PUBLIC_API_BASE_URL` at localhost unless you have private backend access.
 3. Install and run:
 
 ```bash
