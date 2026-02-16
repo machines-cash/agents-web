@@ -1,0 +1,19 @@
+# Public contributor change policy (paths relative to public repo root).
+# Workflow files are intentionally excluded.
+
+README.md
+CONTRIBUTING.md
+SECURITY.md
+LICENSE
+.env.example
+next-env.d.ts
+eslint.config.mjs
+next.config.ts
+package.json
+package-lock.json
+postcss.config.mjs
+tsconfig.json
+vercel.json
+UI_AGENT_CONTEXT.md
+public/
+src/

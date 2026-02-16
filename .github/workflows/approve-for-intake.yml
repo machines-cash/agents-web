@@ -1,0 +1,77 @@
+name: Approve For Intake
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+      - dismissed
+  pull_request:
+    types:
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  intake-label:
+    if: github.event.pull_request.base.ref == 'contrib'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maintain approved intake label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const label = "approved-for-private-intake";
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const pull_number = context.payload.pull_request.number;
+            const action = context.payload.action;
+            const eventName = context.eventName;
+
+            async function addLabel() {
+              try {
+                await github.rest.issues.addLabels({ owner, repo, issue_number: pull_number, labels: [label] });
+              } catch (error) {
+                core.warning(`failed adding label: ${error.message}`);
+              }
+            }
+
+            async function removeLabel() {
+              try {
+                await github.rest.issues.removeLabel({ owner, repo, issue_number: pull_number, name: label });
+              } catch (error) {
+                // Ignore label-not-found.
+                if (error.status !== 404) {
+                  core.warning(`failed removing label: ${error.message}`);
+                }
+              }
+            }
+
+            if (eventName === "pull_request" && action === "synchronize") {
+              core.info("new commits pushed; clearing intake label until re-approval");
+              await removeLabel();
+              return;
+            }
+
+            if (eventName !== "pull_request_review") {
+              return;
+            }
+
+            const review = context.payload.review;
+            const state = (review?.state || "").toLowerCase();
+            const association = review?.author_association || "";
+            const trustedAssociations = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
+
+            if (state === "approved" && trustedAssociations.has(association)) {
+              core.info(`approved by trusted reviewer (${association}); adding intake label`);
+              await addLabel();
+              return;
+            }
+
+            if (state === "changes_requested" || state === "dismissed") {
+              core.info(`review state=${state}; removing intake label`);
+              await removeLabel();
+            }

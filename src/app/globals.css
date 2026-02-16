@@ -1,0 +1,428 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Replica web fonts — Lineto, licensed for machines.cash */
+@font-face {
+  font-family: 'Replica';
+  src: url('/fonts/replica-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Replica Mono';
+  src: url('/fonts/replica-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  text-transform: lowercase !important;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--agent-bg);
+  color: var(--agent-text-primary);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  min-height: calc(var(--agent-vh, 1vh) * 100);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after,
+input, textarea, select, button {
+  text-transform: inherit !important;
+}
+
+.keep-case {
+  text-transform: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(123, 47, 255, 0.3);
+}
+
+/* ─── Mobile viewport lock ─── */
+@media (pointer: coarse), (max-width: 767px) {
+  html, body {
+    height: calc(var(--agent-vh, 1vh) * 100);
+    min-height: calc(var(--agent-vh, 1vh) * 100);
+    max-width: 100vw;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
+
+/* ─── Scrollbar hiding (native app feel) ─── */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (pointer: coarse), (max-width: 767px) {
+  [class*="overflow-y-auto"],
+  [class*="overflow-y-scroll"],
+  [class*="overflow-x-auto"] {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  [class*="overflow-y-auto"]::-webkit-scrollbar,
+  [class*="overflow-y-scroll"]::-webkit-scrollbar,
+  [class*="overflow-x-auto"]::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ─── Glass utility ─── */
+.glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: var(--agent-glass-bg);
+}
+
+.glass-border {
+  border: 1px solid var(--agent-glass-border);
+}
+
+/* ─── Chat message entry ─── */
+@keyframes message-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-message-enter {
+  animation: message-enter var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Slide in from right (user messages) ─── */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Scale in (landing cards) ─── */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scale-in var(--duration-slow) var(--ease-out) both;
+}
+
+/* ─── Suggestion rows appear ─── */
+@keyframes suggestion-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-suggestion-appear {
+  animation: suggestion-appear var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Float (landing mark) ─── */
+@keyframes float {
+  0%, 100% {
+    transform: translate(var(--mouse-x, 0px), calc(var(--mouse-y, 0px) - 6px));
+  }
+  50% {
+    transform: translate(var(--mouse-x, 0px), calc(var(--mouse-y, 0px) + 6px));
+  }
+}
+
+
+/* ─── Typing indicator dots ─── */
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+/* ─── Apple-style spinner ─── */
+@keyframes spinner-fade {
+  0% { opacity: 1; }
+  100% { opacity: 0.15; }
+}
+
+/* ─── Slide up for purchase confirmation ─── */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up var(--duration-slow) var(--ease-out) both;
+}
+
+/* ─── Fade in ─── */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Card shimmer sweep ─── */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(300%) skewX(-15deg); }
+}
+
+/* ─── Mark entrance (scale + fade) ─── */
+@keyframes mark-enter {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-mark-enter {
+  animation: mark-enter 500ms var(--ease-out) both;
+}
+
+/* ─── Hero fade up (slow, elegant entrance for greeting) ─── */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-hero-fade-up {
+  animation: hero-fade-up var(--duration-slower) var(--ease-out) both;
+}
+
+/* ─── Sidebar slide in ─── */
+@keyframes sidebar-slide-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-sidebar-in {
+  animation: sidebar-slide-in var(--duration-normal) var(--ease-out) both;
+}
+
+/* ─── Sidebar backdrop fade ─── */
+@keyframes backdrop-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-backdrop-in {
+  animation: backdrop-fade-in var(--duration-fast) ease-out both;
+}
+
+/* ─── Dropdown menu enter ─── */
+@keyframes dropdown-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-dropdown-enter {
+  animation: dropdown-enter var(--duration-fast) var(--ease-out) both;
+}
+
+/* ─── Thinking indicator shimmer ─── */
+@keyframes thinking-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ─── Gradient drift for connect cards ─── */
+@keyframes gradient-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-thinking {
+  background: linear-gradient(
+    90deg,
+    var(--agent-text-muted) 0%,
+    var(--agent-text-secondary) 25%,
+    var(--agent-text-primary) 50%,
+    var(--agent-text-secondary) 75%,
+    var(--agent-text-muted) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: thinking-shimmer 3s ease-in-out infinite;
+}
+
+/* ─── Product card hover shine ─── */
+@keyframes card-shine {
+  0%   { transform: translateX(-100%) rotate(-45deg); }
+  100% { transform: translateX(200%) rotate(-45deg); }
+}
+
+/* ─── Payment tray: pulse scale (swipe confirmation haptic) ─── */
+@keyframes pulse-scale {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 300ms var(--ease-out) both;
+}
+
+/* ─── Payment tray: draw checkmark stroke ─── */
+@keyframes draw-check {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.animate-draw-check {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: draw-check 400ms var(--ease-out) 200ms forwards;
+}
+
+/* ─── Payment tray: draw X stroke ─── */
+@keyframes draw-x {
+  from { stroke-dashoffset: 20; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.animate-draw-x {
+  stroke-dasharray: 20;
+  stroke-dashoffset: 20;
+  animation: draw-x 400ms var(--ease-out) 200ms forwards;
+}
+
+/* ─── Payment tray: active step pulse dot ─── */
+@keyframes step-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.6; transform: scale(0.85); }
+}
+
+.animate-step-pulse {
+  animation: step-pulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Payment tray: slide-to-confirm hint breathing ─── */
+@keyframes slide-hint {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+.animate-slide-hint {
+  animation: slide-hint 2s ease-in-out infinite;
+}
+
+/* ─── Apple Pay-style liquid glass tray surface ─── */
+.payment-tray-glass {
+  background: rgba(28, 28, 30, 0.72) !important;
+  backdrop-filter: blur(40px) saturate(180%) brightness(105%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(105%) !important;
+  border-top: none !important;
+  border-color: transparent !important;
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.09),
+    inset 0 1px 20px rgba(255, 255, 255, 0.02),
+    0 -4px 40px rgba(0, 0, 0, 0.4) !important;
+  isolation: isolate;
+}
+
+/* Inner highlight gradient pseudo-element */
+.payment-tray-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Slide-to-confirm chevron cascade ─── */
+@keyframes chevron-cascade {
+  0%   { opacity: 0.15; }
+  33%  { opacity: 0.5; }
+  66%  { opacity: 0.15; }
+  100% { opacity: 0.15; }
+}
+
+.chevron-1 { animation: chevron-cascade 1.8s ease-in-out 0s infinite; }
+.chevron-2 { animation: chevron-cascade 1.8s ease-in-out 0.2s infinite; }
+.chevron-3 { animation: chevron-cascade 1.8s ease-in-out 0.4s infinite; }

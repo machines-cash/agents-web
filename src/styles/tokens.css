@@ -1,0 +1,116 @@
+:root {
+  /* ─── Typography ─── */
+  --font-sans: "Replica", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Replica Mono", "SF Mono", "Monaco", "Inconsolata", monospace;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+
+  --display-sm: 32px;
+  --display-md: 48px;
+  --display-lg: 64px;
+  --display-xl: 80px;
+  --display-2xl: 104px;
+  --display-3xl: 124px;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.05em;
+
+  /* ─── Colors ─── */
+  --orange: #FF4500;
+  --violet: #7B2FFF;
+  --blue: #0066FF;
+  --green: #00CC66;
+  --yellow: #FFCC00;
+  --pink: #FF1493;
+  --white: #FFFFFF;
+  --black: #000000;
+  --gray-100: #F5F5F5;
+  --gray-400: #A0A0A0;
+  --gray-600: #666666;
+  --gray-800: #333333;
+
+  /* ─── Spacing ─── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* ─── Radius ─── */
+  --radius-none: 0;
+  --radius-sm: 10px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  --radius-full: 9999px;
+
+  /* ─── Borders ─── */
+  --border-thin: 1px;
+  --border-medium: 2px;
+  --border-thick: 4px;
+
+  /* ─── Shadows ─── */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  /* ─── Motion ─── */
+  --duration-fast: 100ms;
+  --duration-normal: 200ms;
+  --duration-slow: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ─── Layout ─── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --gutter: 24px;
+
+  /* ─── App-derived tokens ─── */
+  --agent-bg: #090909;
+  --agent-surface: var(--gray-800);
+  --agent-surface-elevated: rgba(255, 255, 255, 0.06);
+  --agent-border: rgba(255, 255, 255, 0.1);
+  --agent-border-strong: rgba(255, 255, 255, 0.18);
+  --agent-text-primary: var(--gray-100);
+  --agent-text-secondary: var(--gray-400);
+  --agent-text-muted: var(--gray-600);
+
+  /* ─── Additional surface ─── */
+  --agent-surface-hover: rgba(255, 255, 255, 0.08);
+  --agent-glow-orange: rgba(255, 69, 0, 0.06);
+  --agent-glow-violet: rgba(123, 47, 255, 0.06);
+  --duration-slower: 600ms;
+
+  /* ─── Glass & bubble ─── */
+  --agent-glass-bg: rgba(255, 255, 255, 0.04);
+  --agent-glass-border: rgba(255, 255, 255, 0.08);
+  --agent-user-bubble: rgba(255, 255, 255, 0.08);
+  --agent-user-bubble-border: rgba(255, 255, 255, 0.12);
+
+  /* ─── Sidebar ─── */
+  --agent-sidebar-bg: #0f0f0f;
+  --agent-sidebar-width: 260px;
+  --space-2-5: 10px;
+
+  /* ─── Viewport ─── */
+  --agent-vh: 1vh;
+}
